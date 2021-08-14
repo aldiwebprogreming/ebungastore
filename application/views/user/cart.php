@@ -155,24 +155,24 @@
                                   <div v-if='click == true'>
                                   <label>Masukan Kode Voucher</label>
                                   <input type="text" name="voucher" class="form-control" v-model="voucher" placeholder="_ _ _ _ _ _ _" style="text-align: center;">
-                                  <!-- <input type="submit" name="cek" class="btn btn-primary" value="cek"> -->
+                                  
+
                                   <center>
-                                  <div v-if="cek() == 6">
-                                  <div class="load spinner-border text-success mt-3" role="status">
-                                    <span class="sr-only">Loading...</span>
+                                    <div id="cek" v-if="cek() == 6">
+                                    <div v-if="cek() == 6">
+                                    <div class="load spinner-border text-success mt-3" role="status">
+                                      <span class="sr-only">Loading...</span>
 
+                                    </div>
                                   </div>
-                                  <form method="post" action="<?= base_url('ebunga/vouhcer') ?>">
-
-                                    <input type="text" name="kd_voucher" value="ebunga">
-
-                                    <input type="submit" name="kirim" class="btn btn-primary" id="klik" style="display: none">
-                                  </form>
+                                    <input type="submit" @click.prevent="klik()" name="kirim" class="btn btn-primary" id="klik" style="display: none">
+                                <!--   </form> -->
+                                  </div>
                                   </div>
                                   </center>
                                   
                                  
-                                </div>
+                            
                                 </div>
                                 <!-- <hr>                                 -->
                                 <div class="checkout__order__total">Total <span>Rp <?= $cart['price'] ?></span></div>
@@ -250,6 +250,7 @@
 </div>
 
 
+
      <script type="text/javascript">
   
     $("#pay-button").click(function (event) {
@@ -317,6 +318,9 @@
 
   </script>
 
+
+<!--   vue js -->
+
   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 
   <script>
@@ -336,12 +340,14 @@
 
           reload : function (){
             if (this.cek() == 6) {
-
+                alert('ebunga');
             }
           },
 
-          ebunga: function(){
-
+          klik: function(event){
+             var cek = "<?= base_url('ebunga/cek_voucher?id=') ?>"+'ebunga';
+              $("#cek").load(cek);
+             
           }
         }
 
@@ -351,12 +357,15 @@
     })
   </script>
 
+<!--   end -->
+
 
 
   <script type="text/javascript">
     var auto_refresh = setInterval(
     function () {
         $('#klik').trigger('click');
+       
     }, 7000); 
     
 </script>

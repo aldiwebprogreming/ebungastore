@@ -117,6 +117,20 @@
     
   }
 
+  function cek_voucher(){
+
+    $id  = $this->input->get('id');
+    if ($id == 4) {
+      echo '<small style="color: red">Kode voucher tidak valid</small>
+<br>';
+
+
+    }else{
+       echo '<small style="color: green">Voucher anda benar</small>';
+       echo '<input type="checkbox" id="jack" value="1000" v-model="arr">';
+    }
+  }
+
  }
 
  ?>
