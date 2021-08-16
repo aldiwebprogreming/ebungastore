@@ -20,7 +20,7 @@
             
             <div class="checkout__form">
                 <h4>Billing Details</h4>
-                <form action="#">
+               
                     <div class="row">
                         
 
@@ -139,6 +139,9 @@
 
                                 <hr>
 
+
+
+
                                
 
                                 <div class="form-group" id="app">
@@ -152,14 +155,21 @@
                                     </label>
                                 </div>
 
+
+
+
+                                <div id="cek2">
+                                  
+                                </div>
+
                                   <div v-if='click == true'>
                                   <label>Masukan Kode Voucher</label>
                                   <input type="text" name="voucher" class="form-control" v-model="voucher" placeholder="_ _ _ _ _ _ _" style="text-align: center;">
                                   
 
                                   <center>
-                                    <div id="cek" v-if="cek() == 6">
-                                    <div v-if="cek() == 6">
+                                    <div id="cek" v-if="cek() == 8">
+                                    <div v-if="cek() == 8">
                                     <div class="load spinner-border text-success mt-3" role="status">
                                       <span class="sr-only">Loading...</span>
 
@@ -169,8 +179,10 @@
                                 <!--   </form> -->
                                   </div>
                                   </div>
-                                  </center>
+
                                   
+                               
+                                 
                                  
                             
                                 </div>
@@ -183,6 +195,8 @@
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
+
+                                
                                 
                                
 
@@ -193,7 +207,7 @@
                                 <input type="hidden" name="result_type" id="result-type" value=""></div>
                                 <input type="hidden" name="result_data" id="result-data" value=""></div>
                         
-                              </form>
+                             
                                
                             </div>
                         </div>
@@ -205,6 +219,9 @@
             </div>
         </div>
     </section>
+
+
+
 
     <!-- Button trigger modal -->
 
@@ -319,9 +336,37 @@
   </script>
 
 
+   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+  <script>
+    var app = new Vue({
+      el: '#al',
+      data: {
+        produk : 'ebunga',
+        
+      },
+
+      methods: {
+
+        aa : function(){
+         
+        }
+      }
+
+         
+     
+
+       
+    })
+  </script>
+
+
+
+
+
 <!--   vue js -->
 
-  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+ 
 
   <script>
     var app = new Vue({
@@ -330,6 +375,7 @@
         voucher: '',
         jml: 0,
         click : false,
+        produk2 : 'al'
       },
 
        methods: {
@@ -339,23 +385,42 @@
           },
 
           reload : function (){
-            if (this.cek() == 6) {
+            if (this.cek() == 8) {
                 alert('ebunga');
             }
           },
 
+          coba : function(){
+          return this.produk2 = 'aldi';
+        },
+
+
           klik: function(event){
-             var cek = "<?= base_url('ebunga/cek_voucher?id=') ?>"+'ebunga';
-              $("#cek").load(cek);
+             var cek = "<?= base_url('ebunga/cek_voucher?id=') ?>"+this.voucher+'&total='+<?= $cart['price'] ?>;
+             $.get(cek, function(data){
+                $("#cek").html(data);
+             })
              
           }
-        }
+        },
 
+
+          updated: function(){
+              console.log($el)
+            }
+
+        
      
 
        
     })
   </script>
+
+
+
+
+
+  
 
 <!--   end -->
 
@@ -367,5 +432,13 @@
         $('#klik').trigger('click');
        
     }, 7000); 
+
+
+
     
 </script>
+
+
+
+
+

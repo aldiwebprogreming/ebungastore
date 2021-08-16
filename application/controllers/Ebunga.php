@@ -119,16 +119,26 @@
 
   function cek_voucher(){
 
-    $id  = $this->input->get('id');
-    if ($id == 4) {
-      echo '<small style="color: red">Kode voucher tidak valid</small>
-<br>';
+    $kode_vouhcer  = $this->input->get('id');
+    $data['total'] = $this->input->get('total');
+    $data['voucher'] = $this->db->get_where('tbl_list_voucherproduk',['kode_voucher' => $kode_vouhcer])->row_array();
+    $this->load->view('user/get_voucher', $data);
 
 
-    }else{
-       echo '<small style="color: green">Voucher anda benar</small>';
-       echo '<input type="checkbox" id="jack" value="1000" v-model="arr">';
-    }
+
+
+  }
+
+   function cek2(){
+
+    echo '<div id="ebunga">Hello</div>';
+
+
+
+  }
+
+  function test(){
+    $this->load->view('user/test');
   }
 
  }
