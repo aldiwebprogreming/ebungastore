@@ -38,9 +38,10 @@ class Snap2 extends CI_Controller {
 		
 		// Required
 		$harga = $this->input->post('harga');
-		$nama_produk = $this->input->post('nama_produk');
-		$name = $this->input->post('name');
+		$produk = $this->input->post('produk');
+		$name_buyer = $this->input->post('name_buyer');
 		$email = $this->input->post('email');
+        $nohp = $this->input->post('nohp');
 		
 		$transaction_details = array(
 		  'order_id' => rand(),
@@ -52,7 +53,7 @@ class Snap2 extends CI_Controller {
 		  'id' => 'a1',
 		  'price' => $harga,
 		  'quantity' => 1,
-		  'name' =>$nama_produk,
+		  'name' =>$produk,
 		);
 
 		
@@ -84,10 +85,10 @@ class Snap2 extends CI_Controller {
 
 		// Optional
 		$customer_details = array(
-		  'first_name'    => $name,
+		  'first_name'    => $name_buyer,
 		  'last_name'     => "",
 		  'email'         => $email,
-		  'phone'         => "",
+		  'phone'         => $nohp,
 		  // 'billing_address'  => $billing_address,
 		  // 'shipping_address' => $shipping_address
 		);
@@ -120,12 +121,19 @@ class Snap2 extends CI_Controller {
 
        public function finish()
     {
-
-    	$name = $this->input->post('name');
+        $kode_buyer = $this->input->post('kode_buyer');
+    	$name_buyer = $this->input->post('name_buyer');
     	$email = $this->input->post('email');
-    	$nama_produk = $this->input->post('nama_produk');
+    	$name_produk = $this->input->post('produk');
     	$kode_produk = $this->input->post('kode_produk');
-    	$nama_produk = $this->input->post('nama_produk');
+    	$nohp = $this->input->post('nohp');
+        $harga = $this->input->post('harga');
+        $qty = $this->input->post('qty');
+        $subtotal = $this->input->post('subtotal');
+        $tulisan_papanbunga = $this->input->post('tulisan_papanbunga');
+        $catatan = $this->input->post('catatan');
+        $text_ucapan = $this->input->post('text_ucapan');
+        $dari = $this->input->post('dari');
 
     	$result = json_decode($this->input->post('result_data'), true);
     	// echo 'RESULT <br><pre>';
@@ -134,326 +142,41 @@ class Snap2 extends CI_Controller {
 
     	$data = [
     		'order_id' => $result['order_id'],
-    		'kode_produk' => $kode_produk,
-            'kode_user' => $this->session->kode_user,
-    		'kode_user_member' => $this->input->post('kode_user'),
-    		'nama_produk' => $nama_produk,
-    		'name' => $name,
-    		'email' => $email,
-    		'total' => $result['gross_amount'],
-    		'payment_type' => $result['payment_type'],
+            'kode_buyer' => $kode_buyer,
+            'name_buyer' => $name_buyer,
+            'email' => $email,
+            'no_telp' => $nohp,
+            'kode_produk' => $kode_produk,
+    		'name_produk' => $name_produk,
+            'harga' => $harga,
+            'qty' => $qty,
+            'total_harga' => $subtotal,
+            'note_item' => $tulisan_papanbunga,
+            'catatan' => $catatan,
+            'text_ucapan' => $text_ucapan,
+            'dari' => $dari,
+    		'kode_seller' => '',
+    		'kel' => 11,
+    		'kec' => 11,
+            'kab' => 11,
+            'prov' => 11,	
+    		'metode_pembayaran' => $result['payment_type'],
     		// 'bank' => $result['va_numbers'][0]['bank'],
     		// 'va_number' => $result['va_numbers'][0]['va_number'],
-    		'pdf_url' => $result['pdf_url'],
-    		'status_code' => $result['status_code'],
+    		// 'pdf_url' => $result['pdf_url'],
+    		'status' => $result['status_code'],
     	];
 
-    	$input = $this->db->insert('tbl_transaksi', $data);
+    	$input = $this->db->insert('tbl_checkout', $data);
+        $rowid = $this->input->post('rowid');
+            $this->cart->remove($rowid);
+            $this->session->set_flashdata('message', 'swal("Sukses!!", "Proses Chekout brhasil", "success");');
 
-        // input user 
-
-        $data = [
-            'kode_user' => $this->input->post('kode_user'),
-            'name' => $this->input->post('name2'),
-            'username' => $this->input->post('username'),
-            'email' => $this->input->post('email2'),
-            'no_telp' => $this->input->post('nohp'),
-            'password' => password_hash('aldi123', PASSWORD_DEFAULT),
-            'status' => 0,
-            'kode_jaringan' => $this->session->kode_user." ".$this->input->post('kode_jaringan') ,
-            'kode_rule' => $this->session->kode_user,
-            'lider' => '',
-            'jenis_voucher' => $this->input->post('jenis_voucher'),
-            'bonus_sponsor' => $this->input->post('bonus_sponsor'),
-
-
-        ];
-
-        $aa = $this->db->insert('tbl_register', $data);
-
-    	if ($input) {
-
-
-            // input cashbeack 5%, 10%,
-            // $cashb = 5; 
-            // $harga2 = $result['gross_amount'];
-            // $persen2 = $cashb / 100;
-            // $ecash2 = $persen2 * $harga2;
-
-            //  $data = [
-            //             'kode_user' => $this->input->post('kode_user'),
-            //             'jml_cash' => $ecash2
-            //             ,
-            //      ];
-
-            // $this->db->insert('tbl_cash', $data);
-            // end
-
-            // input bonus lider
-            
-            // $lider = $this->db->get_where('tbl_lider')->row_array();
-            // $persen_lider = $lider['bonus'] / 100;
-            // $bonus_lider = $persen_lider * $harga2;
-
-            // $data_lider = $this->db->get('tbl_lider')->result_array();
-            // foreach ($data_lider as $lider) {
-            //     $data = [
-            //         'kode_user' => $lider['kode_user'],
-            //         'jml_bonus' => $bonus_lider,
-            //     ];
-
-            //     $input_lider = $this->db->insert('tbl_bonus_lider', $data);
-            // }
-            
-            // end
-
-
-            // bonus vendor 0,2 setiap pembelian produk, persen bersifat dinamis dapat di ganti2
-            // $vendor = $this->db->get('tbl_register', 1)->row_array();
-            // $persen3 = 0.2 / 100;
-            // $data = [
-            //     'kode_user' => $vendor['kode_user'],
-            //     'jml_cash' => $persen3 * $result['gross_amount'],
-            // ];
-            // $this->db->insert('tbl_cash', $data);
-            // end
-
-
-    		$kode_user = $this->input->post('kode_user');
-    		$dataku =  $this->db->get_where('tbl_register',['kode_user' => $kode_user])->row_array();
-    		$kode = $dataku['kode_jaringan'];
-            $arr = explode (" ",$kode);
-            $jm_arr = count($arr);
-
-
-
-            if ($jm_arr  == 2) {
-
-                 // $jm = 3;
-
-                for ($i=0; $i < 2 ; $i++) { 
-
-                    
-                     if ($i == 0) {
-                    $level_1 = $this->db->get_where('tbl_level',['name_level' => 'level 1'])->row_array();
-                    $harga = $result['gross_amount'];
-                    $persen = $level_1['jml_level'] / 100 ;
-                    $ecash = $persen * $harga;
-
-                    $data = [
-                        'kode_user' => $arr[$i],
-                        'jml_cash' => $ecash,
-                    ];
-
-                    $this->db->insert('tbl_cash', $data);
-                    }else{
-                    $level_2 = $this->db->get_where('tbl_level',['name_level' => 'level 2'])->row_array();
-                    $harga = $result['gross_amount'];
-                    $persen = $level_2['jml_level'] / 100 ;
-                    $ecash = $persen * $harga;
-
-                    $data = [
-                        'kode_user' => $arr[$i],
-                        'jml_cash' => $ecash,
-                    ];
-
-                    $this->db->insert('tbl_cash', $data);
-                    }
-                }
-                
-            }elseif ($jm_arr == 1) {
-                // $jm = 3;
-
-                for ($i=0; $i < 1 ; $i++) { 
-                   
-                     if ($i == 0) {
-
-                    $level_1 = $this->db->get_where('tbl_level',['name_level' => 'level 1'])->row_array();
-
-                    $harga = $result['gross_amount'];
-                    $persen = $level_1['jml_level'] / 100 ;
-                    $ecash = $persen * $harga;
-
-                    $data = [
-                        'kode_user' => $arr[$i],
-                        'jml_cash' => $ecash,
-                    ];
-
-                    $this->db->insert('tbl_cash', $data);
-                    }
-                }
-            } else {
-
-                 
-
-                for ($i=0; $i < 3 ; $i++) { 
-
-                    if ($i == 0) {
-
-                    $level_1 = $this->db->get_where('tbl_level',['name_level' => 'level 1'])->row_array();
-
-
-                    $harga = $result['gross_amount'];
-                    $persen = $level_1['jml_level'] / 100 ;
-                    $ecash = $persen * $harga;
-
-                    $data = [
-                        'kode_user' => $arr[$i],
-                        'jml_cash' => $ecash,
-                    ];
-
-                    $this->db->insert('tbl_cash', $data);
-                    } elseif ($i == 1) {
-                        $level_2 = $this->db->get_where('tbl_level',['name_level' => 'level 2'])->row_array();
-
-                         $harga = $result['gross_amount'];
-                        $persen = $level_2['jml_level']/ 100 ;
-                        $ecash = $persen * $harga;
-                         $data = [
-                        'kode_user' => $arr[$i],
-                        'jml_cash' => $ecash,
-                    ];
-
-                    $this->db->insert('tbl_cash', $data);
-                    } else {
-                        $level_3 = $this->db->get_where('tbl_level',['name_level' => 'level 3'])->row_array();
-
-                        $harga =  $result['gross_amount'];
-                        $persen = $level_3['jml_level'] / 100 ;
-                        $ecash = $persen * $harga;
-
-                         $data = [
-                        'kode_user' => $arr[$i],
-                        'jml_cash' => $ecash,
-                    ];
-
-                    $this->db->insert('tbl_cash', $data);
-                    }
-                   
-                }
-            }
-
-            $this->bonus2($this->input->post('kode_user'));
-
-    		redirect('ptberkah/invoice');
-    	}else {
-
-            $this->session->set_flashdata('message', 'swal("Anda gagal mendaftarkan sponsor ", "mohon coba beberapa saat lagi", "error");');
-            redirect('pptberkah/add-member');
-    	}
+            redirect('ebunga/keranjang');
 
 
     }
 
     
-
-    function bonus2($kode_user){
-            // mengambil data sponsor yang di daftarkan
-            $kode_sponsor = $kode_user;
-            $user = $this->db->get_where('tbl_register',['kode_user' => $kode_sponsor])->row_array();
-           // end
-
-           // mengambil data user yang mendaftarkan
-
-           $user_pembawa = $this->db->get_where('tbl_register',['kode_user' => $user['kode_rule']])->row_array();
-            // echo $user['jenis_voucher'];
-
-            // mengambil data produk yang di beli oleh sponsor
-            $produk = $this->db->get_where('tbl_produk',['jenis_voucher' => $user['jenis_voucher']])->row_array();
-
-            // mencari jumlah nilai bonus yang di berikan terhadap user yang mendaptarkan
-            $harga = $produk['harga'];
-            $persen = $user_pembawa['bonus_sponsor'] / 100 ;
-            $hasil_bonus = $persen * $harga;
-
-
-            // menyinpan data user yang mendaptarkan ke tbl_bonus_sponsor
-            $data = [
-
-                'kode_user' => $user['kode_rule'],
-                'jml_bonus' => $hasil_bonus,
-
-            ];
-
-           $input =  $this->db->insert('tbl_bonus_sponsor', $data);
-
-           // mengecek apakah data brhasil di input
-           if ($input) {
-                // jik berhasil maka akan mengambil data-data di atas user yang mendatarkan
-                $sponsor = $this->db->get_where('tbl_register',['kode_user' => $user['kode_rule']])->row_array();
-
-                // mengconversi data tersebut ke array
-                $jaringan = $sponsor['kode_jaringan'];
-                $arr = explode (" ",$jaringan);
-
-                // $bonus = $user['bonus_sponsor'];
-
-                $bonus = $sponsor['bonus_sponsor'];
-
-                foreach ($arr as $data) {
-                    $get_bonus = $this->db->get_where('tbl_register',['kode_user'=> $data])->row_array();
-
-                    
-                    // jika data bonus sponsor yang di atas sponsor sama dengan user yang mendaptarkan maka perulangan berhenti
-
-                    if ($sponsor['bonus_sponsor'] == $get_bonus['bonus_sponsor']) {   
-
-                        break;
-                    }
-                    // jika bonus sponsor sudah sama dengan sembilan maka berhenti
-                    elseif ($get_bonus['bonus_sponsor'] == 9) {
-
-                        $ml =  $get_bonus['bonus_sponsor'] - $bonus ;
-
-                        $harga = $produk['harga'];
-                        $persen = $ml / 100 ;
-                        $hasil_bonus = $persen * $harga;
-
-                        $data = [
-
-                                'kode_user' => $get_bonus['kode_user'],
-                                'jml_bonus' => $hasil_bonus,
-
-                            ];
-
-                           $this->db->insert('tbl_bonus_sponsor', $data);
-                       
-                       break;
-                    }
-
-                        $ml =  $get_bonus['bonus_sponsor'] - $bonus ;
-
-                        $harga = $produk['harga'];
-                        $persen = $ml / 100 ;
-                        $hasil_bonus = $persen * $harga;
-
-
-                        if ($hasil_bonus <= 0) {
-                            break;
-                        }
-
-                        $data = [
-
-                                'kode_user' => $get_bonus['kode_user'],
-                                'jml_bonus' => $hasil_bonus,
-
-                            ];
-
-                           $this->db->insert('tbl_bonus_sponsor', $data);
-                  
-
-                    $bonus = $get_bonus['bonus_sponsor'];
-
-                    // echo$rule = $get_bonus['bonus_sponsor'];
-
-                }
-                
-              
-           }
-
-
-
-
-        }
 
 }

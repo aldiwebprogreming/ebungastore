@@ -40,7 +40,7 @@
 					if (password_verify($pass, $cek['pass'])) {
 						
 						$data = [
-							'email' => $email,
+							'email_buyer' => $email,
 							'name_buyer' => $cek['name'],
 							'kode_buyer' => $cek['kode_buyer'],
 						];
@@ -62,6 +62,41 @@
 				}
 
 			}
+
+		function login_cart(){
+
+
+			$email = $this->input->post('email');
+			$pass = $this->input->post('pass');
+
+				$cek = $this->db->get_where('tbl_buyer',['email' => $email])->row_array();
+				if ($cek) {
+					if (password_verify($pass, $cek['pass'])) {
+						
+						$data = [
+							'email_buyer' => $email,
+							'name_buyer' => $cek['name'],
+							'kode_buyer' => $cek['kode_buyer'],
+							'nohp' => $cek['nohp'],
+						];
+						$this->session->set_userdata($data);
+
+						// $this->session->set_flashdata('message', 'swal("Sukses!", "Anda Berhasil Mendaftar", "success");');
+							redirect('ebunga/keranjang');
+					}else{
+
+						$this->session->set_flashdata('message', 'swal("Gagal!", "Password anda salah", "error");');
+							redirect('ebunga/keranjang');
+					}
+					
+				}else{
+
+					$this->session->set_flashdata('message', 'swal("Gagal!", "Akun anda tidak terdaftar", "error");');
+							redirect('ebunga/keranjang');
+
+				}
+
+		}
 
 			function register(){
 				
@@ -102,7 +137,7 @@
 
 			function logout(){
 
-				$this->session->unset_userdata('email','kode_buyer','name_buyer');
+				$this->session->unset_userdata('name_buyer');
 				$this->session->set_flashdata('message', 'swal("Sukses!", "Anda Berhasil Keluar", "success");');
 					redirect('auth/login');
 			}

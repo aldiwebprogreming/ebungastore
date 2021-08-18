@@ -124,6 +124,10 @@
 
                              <input type="hidden" name="kode_produk" class="form-control" value="<?= $detail['kode_produk'] ?>">
 
+                             <input type="hidden" name="nama_produk" class="form-control" value="<?= $detail['nama_produk'] ?>">
+
+                              <input type="hidden" name="gambar" class="form-control" value="<?= $detail['gambar'] ?>">
+
                               <input type="hidden" name="harga" class="form-control" value="<?= $detail['harga_produk'] ?>">
 
                              <input type="hidden" name="jumlah" class="form-control" v-model="jumlah">
