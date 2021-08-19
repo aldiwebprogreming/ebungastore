@@ -53,12 +53,6 @@
                             <h5 class="text-success"><strong>Step 2 Zona Seller</strong></h5>
                             <hr>
 
-                              <select id="prov">
-                         <option>kluar</option>
-                         <option>a</option>
-                         <option>b</option>
-                     </select>
-
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Provinsi</label>
                                 <select @change="prov2" class="form-control" name="prov" v-model="prov" id="prov">
@@ -92,7 +86,7 @@
                             <h5 class="text-success"><strong>Step 3 Document</strong></h5>
                             <hr>
 
-                        <form method="post" action="<?= base_url() ?>seller/action_register">
+                    <form method="post" action="<?= base_url() ?>seller/action_register" enctype="multipart/form-data">
                       
 
                             <div class="form-group">
@@ -195,7 +189,7 @@
         pass1 : '',
         pass2 : '',
         prov:'--Pilih Provinsi',
-        kab : '4',
+        kab : '',
         ktp : '',
         npwp : '',
         siup : '',
