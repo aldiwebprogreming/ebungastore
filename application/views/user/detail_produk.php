@@ -46,6 +46,9 @@
                             vehicula elementum sed sit amet dui. Sed porttitor lectus nibh. Vestibulum ac diam sit amet
                             quam vehicula elementum sed sit amet dui. Proin eget tortor risus.</p>
                         <div id="app">
+
+                          <h3>{{error}}</h3>
+                         
                         <form method="post" action="<?= base_url('ebunga/keranjang') ?>">
                           
                           <section v-if="step == 1">
@@ -190,6 +193,8 @@
             text_ucapan : '',
             dari : '',
 
+            error: '',
+
           },
           methods : {
             nextStep: function(){
@@ -198,6 +203,11 @@
 
             prevtStep: function(){
                 this.step--;
+            }, 
+            cekForm: function(){
+              if (this.tulisan_papanbunga == '') {
+                 this.error = 'Form tidak boleh kosong';
+              }
             }
           }
         })

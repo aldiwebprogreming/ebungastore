@@ -125,7 +125,7 @@
                                         <p class="mb-1"><?= $cart['price2'] ?></p>
                                       </li>
 
-                                       <li class="list-group-item">
+                                      <!--  <li class="list-group-item">
                                         <div class="d-flex w-100 justify-content-between">
                                           <h5 class="mb-1"><strong>Sisa bayar</strong></h5>
                                          
@@ -138,7 +138,7 @@
                                          
                                         </div>
                                         <p class="mb-1"><?= $cart['sisa_voucher'] ?></p>
-                                      </li>
+                                      </li> -->
                                     </ul>
                                 </div>
 
@@ -283,7 +283,7 @@
 
                          <input type="hidden" name="dari" id="dari" value="<?= $cart['dari'] ?>">
 
-                          <input type="tetx" name="rowid" id="" value="<?= $cart['rowid'] ?>">
+                          <input type="hidden" name="rowid" id="" value="<?= $cart['rowid'] ?>">
 
                        
 
@@ -531,9 +531,6 @@
         $('#klik').trigger('click');
        
     }, 7000); 
-
-
-
     
 </script>
 

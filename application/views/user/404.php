@@ -14,7 +14,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <a href="<?= base_url('ebunga/produk') ?>" type="button" class="btn btn-suscess">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -32,6 +32,8 @@
   </div>
 </div>
 
+<!-- <h3>Produk yang anda cari tidak tersedia</h3>
+ -->
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
 <script type="text/javascript">

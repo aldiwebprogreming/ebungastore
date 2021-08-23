@@ -135,6 +135,8 @@ $route['auth/register'] = 'buyer/register';
 
 
 $route['produk/papan-bunga'] = 'ebunga/papan_bunga';
+$route['ebunga/produk-ebunga'] = 'ebunga/produk';
+
 $route['produk/detail-produk/(:any)'] = 'ebunga/detail_produk/$1';
 
 

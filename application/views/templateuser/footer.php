@@ -116,7 +116,14 @@
 
                 var id_kel =$(this).val()
                 var get =  "<?= base_url('ebunga/get_produk?id=') ?>"+id_kel;
-                $("#produk").load(get);
+                 var get2 =  "<?= base_url('ebunga/load') ?>";
+                $("#loading").show();
+                  setTimeout(function () {
+                      $("#produk").load(get);
+                         $("#loading").load(get2);
+                       
+                    }, 1000); 
+               
             })
 
         })

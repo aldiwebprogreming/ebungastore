@@ -15,10 +15,32 @@
 
  	function index(){
 
- 		 $this->load->view('templateuser/header');
+ 		     $this->load->view('templateuser/header');
          $this->load->view('user/index.php');
          $this->load->view('templateuser/footer');
  	}
+
+
+  function produk(){
+
+       $this->db->select('nama_produk');
+        $this->db->select('gambar');
+        $this->db->distinct();
+        $data['produk'] = $this->db->get('tbl_produk')->result_array();
+        $data['prov'] = $this->m_data->get('tbl_provinsi');
+
+        $data['parcel'] = $this->db->get_where('tbl_produk',['kategori_produk' => 'parcel'])->result_array();
+
+        $data['papanbunga'] = $this->db->get_where('tbl_produk',['kategori_produk' => 'papan-bunga'])->result_array();
+
+         $data['bunga'] = $this->db->get_where('tbl_produk',['kategori_produk' => 'bunga'])->result_array();
+
+          $data['cake'] = $this->db->get_where('tbl_produk',['kategori_produk' => 'cake'])->result_array();
+
+         $this->load->view('templateuser/header');
+         $this->load->view('user/produk.php', $data);
+         $this->load->view('templateuser/footer');
+  }
  	
 
  	function papan_bunga(){
@@ -110,7 +132,12 @@
 
     $id = $this->input->get('id');
 
-    $data['produk'] = $this->db->get_where('tbl_produk',['kel' => 11])->result_array();
+    $data['produk'] = $this->db->get_where('tbl_produk',['kel' => $id])->result_array();  
+    $data['parcel'] = $this->db->get_where('tbl_produk',['kategori_produk' => 'parcel', 'kel' => $id])->result_array();
+   $data['papanbunga'] = $this->db->get_where('tbl_produk',['kategori_produk' => 'papan-bunga', 'kel' => $id])->result_array();
+  $data['bunga'] = $this->db->get_where('tbl_produk',['kategori_produk' => 'bunga', 'kel' => $id])->result_array();
+  $data['cake'] = $this->db->get_where('tbl_produk',['kategori_produk' => 'cake', 'kel' => $id])->result_array();
+
 
 
     if ($data['produk'] == null) {
@@ -121,6 +148,11 @@
     }
 
     
+  }
+
+  function load(){
+
+    echo '';
   }
 
   function cek_voucher(){

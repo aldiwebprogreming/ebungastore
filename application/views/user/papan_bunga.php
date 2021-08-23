@@ -99,7 +99,7 @@
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6>Papan Bunga</h6>
-                                                <span>$300.000</span>
+                                                <span>Rp 300.000</span>
                                             </div>
                                         </a>
                                         <a href="#" class="latest-product__item">
@@ -108,7 +108,7 @@
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6>Buket A</h6>
-                                                <span>Rp100.000</span>
+                                                <span>Rp 100.000</span>
                                             </div>
                                         </a>
                                     </div>
@@ -296,7 +296,7 @@
 
                     <div class="row" id="produk">
                         
-
+                            
                         
                         
                     </div>
