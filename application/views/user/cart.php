@@ -117,13 +117,13 @@
                                         </div>
                                         <p class="mb-1"><?= $cart['dari'] ?></p>
                                       </li>
-                                       <li class="list-group-item">
+                                       <!-- <li class="list-group-item">
                                         <div class="d-flex w-100 justify-content-between">
                                           <h5 class="mb-1"><strong>Harga 2</strong></h5>
                                          
                                         </div>
                                         <p class="mb-1"><?= $cart['price2'] ?></p>
-                                      </li>
+                                      </li> -->
 
                                       <!--  <li class="list-group-item">
                                         <div class="d-flex w-100 justify-content-between">

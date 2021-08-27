@@ -137,7 +137,7 @@
                         
                             
                         <div id="filter" class="text-center mb-5">
-                             <button type="button" id="papan bunga" class="btn btn-outline-info mr-3" @click="all">All <i class="fas fa-chalkboard"></i> </button>
+                             <button type="button" id="papan bunga" class="btn btn-outline-info mr-3" @click="all">All <i class="fas fa-list"></i> </button>
 
                             <button type="button" id="papan bunga" class="btn btn-outline-primary mr-3" @click="papanbunga">Papan Bunga <i class="fas fa-chalkboard"></i> </button>
 
