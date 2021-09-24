@@ -17,7 +17,7 @@
 
 				$this->form_validation->set_rules('email','email','required');
 				$this->form_validation->set_rules('pass','password','required');
-				$this->form_validation->set_rules('rule','rule','required');
+				// $this->form_validation->set_rules('rule','rule','required');
 
 				if ($this->form_validation->run() == false) {
 					$this->load->view('templateuser/header');
@@ -27,18 +27,8 @@
 
 					$email = $this->input->post('email');
 					$pass = $this->input->post('pass');
-					$rule = $this->input->post('rule');
-
-					if ($rule == 'ebunga') {
-						$this->login_ebunga($email, $pass);
-					}elseif ($rule == 'ptb') {
-						$this->login_ptb($email, $pass);
-					}else{
-
-							$this->session->set_flashdata('message', 'swal("Gagal!", "Plih metode login", "error");');
-							redirect('auth/login');
-					}
-					
+					// $rule = $this->input->post('rule');
+					$this->login_ebunga($email, $pass);
 				}
 
 				
@@ -67,8 +57,36 @@
 					
 				}else{
 
-					$this->session->set_flashdata('message', 'swal("Gagal!", "Akun anda tidak terdaftar", "error");');
+					 $curl = curl_init();
+				     curl_setopt($curl, CURLOPT_URL, "http://localhost/rest_api/user/det_user?email=$email");
+				     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+				     $result = curl_exec($curl);
+				     curl_close($curl);
+				     $user = json_decode($result, true);
+
+				  	$ptb = $user['data']['email'];
+				  	$pass_ptb = $user['data']['password'];
+				  	if ($email === $ptb) {
+				  		
+				  		if (password_verify($pass, $pass_ptb)) {
+				  			$data = [
+							'email_buyer' => $email,
+							'name_buyer' => $user['data']['name'],
+						];
+						$this->session->set_userdata($data);
+						redirect('ebunga/');
+				  			
+				  		}else{
+				  		$this->session->set_flashdata('message', 'swal("Gagal!", "Password anda salah", "error");');
 							redirect('auth/login');
+				  		}
+				  	}else{
+				  		$this->session->set_flashdata('message', 'swal("Gagal!", "Akun anda tidak terdaftar", "error");');
+							redirect('auth/login');
+
+				  	}
+
+					
 
 				}
 
@@ -180,5 +198,36 @@
 				$this->session->set_flashdata('message', 'swal("Sukses!", "Anda Berhasil Keluar", "success");');
 					redirect('auth/login');
 			}
+
+
+			function api_user(){
+				 $curl = curl_init();
+			     curl_setopt($curl, CURLOPT_URL, 'http://localhost/rest_api/user/index');
+			     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+			     $result = curl_exec($curl);
+			     curl_close($curl);
+			     $result = json_decode($result, true);
+			      
+
+			        foreach ($result['data'] as $data) {
+			         echo $data['password']."<br>";
+			        }
+			}
+
+
+			function get_user_api(){
+
+				 $curl = curl_init();
+			     curl_setopt($curl, CURLOPT_URL, 'http://localhost/rest_api/user/det_user?email=ebunga2@gmail.com');
+			     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+			     $result = curl_exec($curl);
+			     curl_close($curl);
+			     $user = json_decode($result, true);
+
+			  	echo  $user['data']['email'];
+				
+			}
+
+
 		}
  ?>

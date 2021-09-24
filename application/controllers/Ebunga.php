@@ -302,6 +302,23 @@ if ($hasil2 <= 0) {
 
  }
 
+ function get_api(){
+
+       $curl = curl_init();
+      curl_setopt($curl, CURLOPT_URL, 'http://localhost/rest_api/user/index');
+      curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+       $result = curl_exec($curl);
+        curl_close($curl);
+        $result = json_decode($result, true);
+      
+
+        foreach ($result['data'] as $data) {
+         echo $data['password']."<br>";
+        }
+
+
+ }
+
 
  }
 

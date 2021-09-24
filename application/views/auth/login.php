@@ -35,31 +35,16 @@
                         <input type="password" class="form-control" id="exampleInputPassword1" name="pass" placeholder="Masukan password">
                         <small id="emailHelp" class="form-text text-muted" style="color: red"><?php echo form_error('pass'); ?></small>
                     </div>
-                    <div class="form-group form-check">
-                        <input type="radio" class="form-check-input" id="one" value="ebunga" v-model="picked">
-                        <label class="form-check-label mr-5" for="exampleCheck1"><strong>Login dengan ebunga</strong></label>
-
-                        <input type="radio" class="form-check-input" id="ptb" value="ptb" v-model="picked">
-                        <label class="form-check-label" for="exampleCheck1"><strong>
-                        Login dengan PTB</strong></label>
+                    
 
                        
                     </div>
 
-                    <input type="hidden" name="rule" v-model="picked">
-
-
-
-                  <!--   <span>Yang dipilih: {{ picked }}</span> -->
                   <button id="submit" type="submit" class="btn btn-success btn-block"><strong>MASUK</strong></button>
 
                     <p class="text-center mt-2 m-b-">Belum punya akun?</p>
 
                     <a href="<?= base_url('auth/register') ?>" id="submit" type="submit" class="btn btn-info btn-block"><strong>MENDAFTAR DISINI  <i class="fa fa-arrow-right"></i></strong></a>
-
-
-                    <!-- <button type="submit" class="btn btn-success">Login</button>
-                     <button @click.prevent="alert" class="btn btn-success">Register</button> -->
 
                 </form>
                 </div>
@@ -76,19 +61,5 @@
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0/dist/vue.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    var app = new Vue({
-      el: '#app',
-      data: {
-        picked: '',
-      },
 
-      methods : {
-
-        alert: function(event){
-            Swal.fire('Any fool can use a computer');
-        }
-      }
-    })
-</script>
 
