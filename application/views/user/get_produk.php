@@ -18,25 +18,23 @@
    
 </div>
 <div id="filter" v-if="filter == 'all'">
-<?php foreach ($produk as $data) { ?>
-    <div class="col-lg-4 col-md-6 col-sm-6">
-        <div class="product__item">
-            <div class="product__item__pic set-bg" data-setbg="">
-                <img src="<?= base_url() ?>assets_user/img/product/<?= $data['gambar'] ?> ">
-                <ul class="product__item__pic__hover">
-                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                    <li><a href="<?= base_url() ?>/produk/detail-produk/<?= $data['kode_produk'] ?>"><i class="fa fa-retweet"></i></a></li>
-                    <li><a href="<?= base_url() ?>/produk/detail-produk/<?= $data['kode_produk'] ?>"><i class="fa fa-shopping-cart"></i></a></li>
-                </ul>
+    <div class="row">
+         <?php foreach ($produk as $data) { ?>
+            <div class="col-lg-4 mb-5">
+                <div class="card shadow" style="">
+                  <img src="<?= base_url() ?>assets_user/img/product/<?= $data['gambar'] ?>" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title text-center"><strong><?= $data['nama_produk'] ?></strong></h5>
+                    <p class="card-text"></p>
+                    <a href="<?= base_url() ?>/produk/detail-produk/<?= $data['kode_produk'] ?>" class="btn btn-success btn-sm btn-lg btn-block">Belanja<i class="fas fa-shopping-bag"></i></a>
+                  </div>
+                </div>
             </div>
-            <div class="product__item__text">
-                <h6><a href="#"><?= $data['nama_produk'] ?></a></h6>
-                <h5>Rp <?= $data['harga_produk'] ?></h5>
-            </div>
-        </div>
+
+        <?php } ?>
     </div>
- <?php } ?>
 </div>
+
 
 <div id="papanbunga" v-if="filter == 'papanbunga'">
     <?php 
@@ -44,24 +42,22 @@
             echo '<h3 class="text-center"> Produk Tidak tersedia </h3>' ;
         }else{
      ?>
+     <div class="row">
    <?php foreach ($papanbunga as $data) { ?>
-    <div class="col-lg-4 col-md-6 col-sm-6">
-        <div class="product__item">
-            <div class="product__item__pic set-bg" data-setbg="">
-                <img src="<?= base_url() ?>assets_user/img/product/<?= $data['gambar'] ?> ">
-                <ul class="product__item__pic__hover">
-                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                    <li><a href="<?= base_url() ?>/produk/detail-produk/<?= $data['kode_produk'] ?>"><i class="fa fa-retweet"></i></a></li>
-                    <li><a href="<?= base_url() ?>/produk/detail-produk/<?= $data['kode_produk'] ?>"><i class="fa fa-shopping-cart"></i></a></li>
-                </ul>
-            </div>
-            <div class="product__item__text">
-                <h6><a href="#"><?= $data['nama_produk'] ?></a></h6>
-                <h5>Rp <?= $data['harga_produk'] ?></h5>
-            </div>
+
+    <div class="col-lg-4 mb-5">
+        <div class="card shadow" style="">
+          <img src="<?= base_url() ?>assets_user/img/product/<?= $data['gambar'] ?>" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title text-center"><strong><?= $data['nama_produk'] ?></strong></h5>
+            <p class="card-text"></p>
+            <a href="<?= base_url() ?>/produk/detail-produk/<?= $data['kode_produk'] ?>" class="btn btn-success btn-sm btn-lg btn-block">Belanja <i class="fas fa-shopping-bag"></i></a>
+          </div>
         </div>
     </div>
+    
  <?php } ?>
+</div>
 <?php } ?>
 </div>
 
@@ -71,24 +67,20 @@
             echo '<h3 class="text-center"> Produk Tidak tersedia </h3>' ;
         }else{
      ?>
+     <div class="row">
     <?php foreach ($parcel as $data) { ?>
-    <div class="col-lg-4 col-md-6 col-sm-6">
-        <div class="product__item">
-            <div class="product__item__pic set-bg" data-setbg="">
-                <img src="<?= base_url() ?>assets_user/img/product/<?= $data['gambar'] ?> ">
-                <ul class="product__item__pic__hover">
-                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                    <li><a href="<?= base_url() ?>/produk/detail-produk/<?= $data['kode_produk'] ?>"><i class="fa fa-retweet"></i></a></li>
-                    <li><a href="<?= base_url() ?>/produk/detail-produk/<?= $data['kode_produk'] ?>"><i class="fa fa-shopping-cart"></i></a></li>
-                </ul>
-            </div>
-            <div class="product__item__text">
-                <h6><a href="#"><?= $data['nama_produk'] ?></a></h6>
-                <h5>Rp <?= $data['harga_produk'] ?></h5>
-            </div>
+    <div class="col-lg-4 mb-5">
+        <div class="card shadow" style="">
+          <img src="<?= base_url() ?>assets_user/img/product/<?= $data['gambar'] ?>" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title text-center"><strong><?= $data['nama_produk'] ?></strong></h5>
+            <p class="card-text"></p>
+            <a href="<?= base_url() ?>/produk/detail-produk/<?= $data['kode_produk'] ?>" class="btn btn-success btn-sm btn-lg btn-block">Belanja <i class="fas fa-shopping-bag"></i></a>
+          </div>
         </div>
     </div>
  <?php } ?>
+</div>
 <?php } ?>
 </div>
 
@@ -98,24 +90,20 @@
             echo '<h3 class="text-center"> Produk Tidak tersedia </h3>' ;
         }else{
      ?>
+     <div class="row">
     <?php foreach ($bunga as $data) { ?>
-    <div class="col-lg-4 col-md-6 col-sm-6">
-        <div class="product__item">
-            <div class="product__item__pic set-bg" data-setbg="">
-                <img src="<?= base_url() ?>assets_user/img/product/<?= $data['gambar'] ?> ">
-                <ul class="product__item__pic__hover">
-                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                    <li><a href="<?= base_url() ?>/produk/detail-produk/<?= $data['kode_produk'] ?>"><i class="fa fa-retweet"></i></a></li>
-                    <li><a href="<?= base_url() ?>/produk/detail-produk/<?= $data['kode_produk'] ?>"><i class="fa fa-shopping-cart"></i></a></li>
-                </ul>
-            </div>
-            <div class="product__item__text">
-                <h6><a href="#"><?= $data['nama_produk'] ?></a></h6>
-                <h5>Rp <?= $data['harga_produk'] ?></h5>
-            </div>
+    <div class="col-lg-4 mb-5">
+        <div class="card shadow" style="">
+          <img src="<?= base_url() ?>assets_user/img/product/<?= $data['gambar'] ?>" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title text-center"><strong><?= $data['nama_produk'] ?></strong></h5>
+            <p class="card-text"></p>
+            <a href="<?= base_url() ?>/produk/detail-produk/<?= $data['kode_produk'] ?>" class="btn btn-success btn-sm btn-lg btn-block">Belanja <i class="fas fa-shopping-bag"></i></a>
+          </div>
         </div>
     </div>
  <?php } ?>
+ </div>
 <?php } ?>
 </div>
 
@@ -125,24 +113,20 @@
             echo '<h3 class="text-center"> Produk Tidak tersedia </h3>' ;
         }else{
      ?>
+     <div class="row">
     <?php foreach ($cake as $data) { ?>
-    <div class="col-lg-4 col-md-6 col-sm-6">
-        <div class="product__item">
-            <div class="product__item__pic set-bg" data-setbg="">
-                <img src="<?= base_url() ?>assets_user/img/product/<?= $data['gambar'] ?> ">
-                <ul class="product__item__pic__hover">
-                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                    <li><a href="<?= base_url() ?>/produk/detail-produk/<?= $data['kode_produk'] ?>"><i class="fa fa-retweet"></i></a></li>
-                    <li><a href="<?= base_url() ?>/produk/detail-produk/<?= $data['kode_produk'] ?>"><i class="fa fa-shopping-cart"></i></a></li>
-                </ul>
-            </div>
-            <div class="product__item__text">
-                <h6><a href="#"><?= $data['nama_produk'] ?></a></h6>
-                <h5>Rp <?= $data['harga_produk'] ?></h5>
-            </div>
+        <div class="col-lg-4 mb-5">
+        <div class="card shadow" style="">
+          <img src="<?= base_url() ?>assets_user/img/product/<?= $data['gambar'] ?>" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title text-center"><strong><?= $data['nama_produk'] ?></strong></h5>
+            <p class="card-text"></p>
+            <a href="<?= base_url() ?>/produk/detail-produk/<?= $data['kode_produk'] ?>" class="btn btn-success btn-sm btn-lg btn-block">Belanja <i class="fas fa-shopping-bag"></i></a>
+          </div>
         </div>
     </div>
  <?php } ?>
+ </div>
 <?php } ?>
 </div>
 

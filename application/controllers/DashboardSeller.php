@@ -66,25 +66,43 @@
 
 			 	$zona_produk = $this->db->get_where('tbl_zona',['kode_seller' => $this->session->kode_seller])->result_array();
 			 	
+			 	$kategori_produk = $this->input->post('kategori_produk');
+			 	$slug_kategori = str_replace(" ", "-", strtolower($kategori_produk));
+
 			 	foreach ($zona_produk as $zona) {
 		 		$data = [
 		 			'kode_produk' => $kode_produk,
 		 			'kategori_produk' => $this->input->post('kategori_produk'),
+		 			'slug_kategori' => $slug_kategori,
 		 			'nama_produk' => $this->input->post('nama_produk'),
 		 			'harga_produk' => $this->input->post('harga'),
 		 			'gambar' => $produk,
 		 			'kode_seller' => $this->session->kode_seller,
+		 			'slug_produk' => $slug_produk,
 		 			'prov' => $this->session->prov,
 		 			'kab' => $this->session->kab,
 		 			'kec' =>$zona['kec'] ,
 		 			'kel' => $zona['kel'],
-		 			'slug_produk' => $slug_produk,
 
 		 		];
 
-		 		$input = $this->db->insert('tbl_produk', $data);
-
+		 		$inputProduk = $this->db->insert('tbl_produk', $data);
 		 	}
+		 		// foreach ($zona_produk as $zona) {
+
+		 		// 	$data = [
+		 		// 	'kode_produk' => $kode_produk,
+		 		// 	'kode_seller' => $this->session->kode_seller,
+		 		// 	'prov' => $this->session->prov,
+		 		// 	'kab' => $this->session->kab,
+		 		// 	'kec' =>$zona['kec'] ,
+		 		// 	'kel' => $zona['kel'],
+		 		// 	];
+
+		 		// 	$inputZonaProduk = $this->db->insert('tbl_zona_produk', $data);
+		 		// }
+
+		 	
 
 		 		$this->session->set_flashdata('message', 'swal("Sukses!", "Produk Anda berhasil diupload", "success");');
 		 		redirect('DashboardSeller/upload_produk');
@@ -149,6 +167,16 @@
 					$this->session->set_flashdata('message', 'swal("Success!", "Zona anda berhasil perbaharui", "success");');
 				redirect('DashboardSeller/set_zona');
 				
+			}
+
+
+			function data_produk(){
+
+				$kode_seller = $this->session->kode_seller;
+				$this->db->select('kode_seller');
+				$this->db->distinct();
+				$query = $this->db->get('tbl_produk')->result_array();
+				var_dump($query);
 			}
 
 

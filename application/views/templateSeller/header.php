@@ -57,21 +57,21 @@
           <ul class="sidebar-menu">
 
               <li class="menu-header">Home</li>
-                <li class=""><a class="nav-link" href="<?= base_url('ptberkah/home') ?>"><i class="fas fa-fire"></i> <span>Home</span></a></li>
+                <li class=""><a class="nav-link" href="<?= base_url('seller/dashboard') ?>"><i class="fas fa-fire"></i> <span>Home</span></a></li>
               </li>
 
               
 
               <li class="menu-header">Produk</li>
-                <li class=""><a class="nav-link" href="<?= base_url('ptberkah/add-member') ?>"><i class="fas fa-plus"></i> <span>Tambah Produk</span></a></li>
+                <li class=""><a class="nav-link" href="<?= base_url('seller/upload-produk') ?>"><i class="fas fa-plus"></i> <span>Tambah Produk</span></a></li>
               </li>
 
 
-              <li class=""><a class="nav-link" href="<?= base_url('ptberkah/data-jaringan') ?>"><i class="fas fa-list"></i> <span>Data Produk</span></a></li>
+              <li class=""><a class="nav-link" href="<?= base_url('seller/data-produk') ?>"><i class="fas fa-list"></i> <span>Data Produk</span></a></li>
               </li>
 
                <li class="menu-header">Order</li>
-                <li class=""><a class="nav-link" href="<?= base_url('ptberkah/add-member') ?>"><i class="fas fa-shopping-cart"></i> <span>Data Order</span></a></li>
+                <li class=""><a class="nav-link" href="<?= base_url('seller/data-order') ?>"><i class="fas fa-shopping-cart"></i> <span>Data Order</span></a></li>
               </li>
 
 
@@ -79,7 +79,7 @@
 
              <li class="menu-header">Seting</li>
 
-              <li class=""><a class="nav-link" href="<?= base_url('ptberkah/data-jaringan') ?>"><i class="fas fa-users"></i> <span>Seting Zona</span></a></li>
+              <li class=""><a class="nav-link" href="<?= base_url('seller/setzona') ?>"><i class="fas fa-users"></i> <span>Seting Zona</span></a></li>
               </li>
 
              <!--  <li class="menu-header">Bonus</li>
@@ -93,7 +93,7 @@
               </li> -->
 
                <li class="menu-header">Profil</li>
-                <li class=""><a class="nav-link" href="<?= base_url('ptberkah/profil') ?>"><i class="fas fa-user"></i> <span>Profil</span></a></li>
+                <li class=""><a class="nav-link" href="<?= base_url('seller/profil') ?>"><i class="fas fa-user"></i> <span>Profil</span></a></li>
               </li>
 
 
